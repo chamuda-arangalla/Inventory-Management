@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Mangement System</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <button onclick="loadPage('../forms/item-form.html')">View Items</button>
+        <button onclick="loadPage('../forms/item-form.html')">Add Items</button>
+        <button onclick="loadPage('../forms/supplier-form.html')">Add Supplier</button>
+    </div>
+    <div class="main-content" id="content">
+        <h1>Welcome to the Dashboard</h1>
+        <p>Select an option from the sidebar.</p>
+        <iframe id="content-frame" src="home.html" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>
