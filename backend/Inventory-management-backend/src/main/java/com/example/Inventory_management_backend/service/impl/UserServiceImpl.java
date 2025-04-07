@@ -57,12 +57,12 @@ public class UserServiceImpl implements UserService {
     private void validateUserRequest(UserRequest userRequest) throws AllReadyExistsException {
 
         // Check the email already exists
-        User existEmail = userRepository.findByUsername(userRequest.getEmail());
+        User existEmail = userRepository.findByEmail(userRequest.getEmail());
         if (existEmail != null) {
             throw new AllReadyExistsException("Email address already exists");
         }
         // Check the username already exists
-        User existUsername = userRepository.findByEmail(userRequest.getUsername());
+        User existUsername = userRepository.findByUsername(userRequest.getUsername());
         if (existUsername != null) {
             throw new AllReadyExistsException("Username already exists");
         }
