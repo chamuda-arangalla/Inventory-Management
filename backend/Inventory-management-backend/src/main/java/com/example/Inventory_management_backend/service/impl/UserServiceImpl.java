@@ -41,17 +41,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse updateUser(long userId, UserRequest userRequest) throws NotFoundException, AllReadyExistsException {
-        return null;
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found with id " + userId));
+
+        // Validate username and email exist
+        validateUserRequest(userRequest);
+        // Set user details
+        setUserDetails(userRequest, existingUser);
+
+        userRepository.save(existingUser);
+
+        return mapToUserResponse(existingUser);
     }
 
     @Override
     public UserResponse getUser(long userId) throws NotFoundException {
-        return null;
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found with id " + userId));
+
+        return mapToUserResponse(user);
     }
 
     @Override
     public void deleteUser(long userId) throws NotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found with id " + userId));
 
+        userRepository.delete(user);
     }
 
     private void validateUserRequest(UserRequest userRequest) throws AllReadyExistsException {
