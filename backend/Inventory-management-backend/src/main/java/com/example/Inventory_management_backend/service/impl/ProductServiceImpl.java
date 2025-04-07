@@ -46,17 +46,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse updateProduct(long productId, ProductRequest productRequest) throws NotFoundException, AllReadyExistsException, InvalidDateException {
-        Product product = productRepository.findById((productId))
-                .orElseThrow(() -> new NotFoundException("Product not found"));
+        Product existingProduct = productRepository.findById((productId))
+                .orElseThrow(() -> new NotFoundException("Product not found with id: " + productId));
 
         // Validate product name exist and expiry date
         validateProductRequest(productRequest);
         // Set product details
-        setProductDetails(productRequest, product);
+        setProductDetails(productRequest, existingProduct);
 
-        productRepository.save(product);
+        productRepository.save(existingProduct);
 
-        return mapToProductResponse(product);
+        return mapToProductResponse(existingProduct);
     }
 
     @Override
