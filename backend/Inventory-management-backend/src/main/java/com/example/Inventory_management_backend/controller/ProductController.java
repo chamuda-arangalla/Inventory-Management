@@ -30,17 +30,17 @@ public class ProductController {
     }
 
     @PutMapping("/update/{productId}")
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long productId, @RequestBody ProductRequest productRequest) throws NotFoundException,AllReadyExistsException, InvalidDateException {
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable long productId, @RequestBody ProductRequest productRequest) throws NotFoundException,AllReadyExistsException, InvalidDateException {
         return ResponseEntity.ok(productService.updateProduct(productId, productRequest));
     }
 
     @GetMapping("/get-product/{productId}")
-    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long productId) throws NotFoundException {
+    public ResponseEntity<ProductResponse> getProduct(@PathVariable long productId) throws NotFoundException {
         return ResponseEntity.ok(productService.getProduct(productId));
     }
 
     @DeleteMapping("/delete/{productId}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long productId) throws NotFoundException {
+    public ResponseEntity<String> deleteProduct(@PathVariable long productId) throws NotFoundException {
         productService.deleteProduct(productId);
         return ResponseEntity.ok("Product deleted successfully");
     }
