@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +20,10 @@ public class Product {
     private int quantityInStock;
     private Double unitPrice;
     private LocalDate expiryDate;
+
+    @ManyToOne
+    private Supplier supplier;
+
+    @OneToOne
+    private Inventory inventory;
 }

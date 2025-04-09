@@ -3,6 +3,8 @@ package com.example.Inventory_management_backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "suppliers")
@@ -15,4 +17,7 @@ public class Supplier {
     private String address;
     private String email;
     private String phone;
+
+    @OneToMany
+    private List<Product> products;
 }
