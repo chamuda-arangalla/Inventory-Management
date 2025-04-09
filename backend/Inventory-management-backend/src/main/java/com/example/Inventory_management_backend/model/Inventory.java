@@ -13,6 +13,9 @@ public class Inventory {
     private Long id;
     private Integer quantity;
 
+    @Enumerated(EnumType.STRING)
+    private StockStatus stockStatus;
+
     @OneToOne
     private Product product;
 
