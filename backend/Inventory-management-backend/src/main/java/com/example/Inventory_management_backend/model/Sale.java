@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.security.PrivateKey;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,10 +16,14 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User user;
-
     private LocalDate date;
-    private Double total;
+    private Double totalSale;
 
+    @ManyToMany
+    @JoinTable(
+            name = "order_sales",
+            joinColumns = @JoinColumn(name = "sale_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private List<Order> orders;
 }

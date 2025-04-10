@@ -26,4 +26,10 @@ public class Order {
     )
     @JsonIgnore
     private List<Product> products;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus = OrderStatus.PENDING;
+
+    @ManyToMany
+    private List<Sale> sales;
 }
