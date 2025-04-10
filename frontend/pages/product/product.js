@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Here we're just simulating with the first product's data
             document.getElementById('editProductId').value = productId;
             document.getElementById('editProductName').value = "Wireless Headphones";
-            document.getElementById('editSku').value = "WH-1000XM4";
+            // document.getElementById('editSku').value = "WH-1000XM4";
             document.getElementById('editCategory').value = "Electronics";
-            document.getElementById('editBrand').value = "Sony";
+            // document.getElementById('editBrand').value = "Sony";
             document.getElementById('editPrice').value = "349.99";
-            document.getElementById('editCost').value = "250.00";
+            // document.getElementById('editCost').value = "250.00";
             document.getElementById('editQuantity').value = "45";
             document.getElementById('editDescription').value = "Premium noise-canceling wireless headphones with long battery life.";
             
