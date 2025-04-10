@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,10 +39,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse createProduct(ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException, NotFoundException {
         // Find supplier exists
-        Supplier supplier = supplierRepository.findById(productRequest.getSupplier().getId()).get();
-        if(supplier == null) {
-            throw new NotFoundException("Supplier not found with id " + productRequest.getSupplier().getId());
+        Optional<Supplier> optionalSupplier = supplierRepository.findById(productRequest.getSupplierId());
+        if(!optionalSupplier.isPresent()) {
+            throw new NotFoundException("Supplier not found with id " + productRequest.getSupplierId());
         }
+
+        Supplier foundSupplier = optionalSupplier.get();
         // Validate expiry date
         validateProductRequest(productRequest);
 
@@ -49,9 +52,9 @@ public class ProductServiceImpl implements ProductService {
         // Set product details
         setProductDetails(productRequest, newProduct);
         // Set supplier
-        newProduct.setSupplier(supplier);
+        newProduct.setSupplier(foundSupplier);
         // Set product to supplier
-        supplier.getProducts().add(newProduct);
+        foundSupplier.getProducts().add(newProduct);
 
         productRepository.save(newProduct);
 
@@ -67,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
         newProduct.setInventory(newInventory);
         productRepository.save(newProduct);
 
-        supplierRepository.save(supplier);
+//        supplierRepository.save(supplier);
 
         return mapToProductResponse(newProduct);
 
@@ -122,6 +125,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void setProductDetails(ProductRequest productRequest, Product product) {
+
+//       Optional<Supplier> optionalSupplier = supplierRepository.findById(productRequest.getSupplierId());
+//
+//       if (!optionalSupplier.isPresent()){
+//           throw new RuntimeException("supplier not found with id " + productRequest.getSupplierId());
+//       }
+//
+//        Supplier foundSupplier = optionalSupplier.get();
+
+//        product.setSupplier(foundSupplier);
         product.setProductName(productRequest.getProductName());
         product.setDescription(productRequest.getDescription());
         product.setCategory(productRequest.getCategory());
@@ -143,7 +156,7 @@ public class ProductServiceImpl implements ProductService {
                         SupplierResponse.builder()
                                 .id(product.getSupplier().getId())
                                 .name(product.getSupplier().getName())
-                                .address(product.getSupplier().getAddress())
+//                                .address(product.getSupplier().getAddress())
                                 .email(product.getSupplier().getEmail())
                                 .phone(product.getSupplier().getPhone())
                                 .build()
