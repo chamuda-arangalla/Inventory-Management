@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductResponse createProduct(ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException;
+    ProductResponse createProduct(ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException, NotFoundException;
     List<ProductResponse> getAllProducts();
     ProductResponse updateProduct(long productId, ProductRequest productRequest) throws NotFoundException, AllReadyExistsException, InvalidDateException;
     ProductResponse getProduct(long productId) throws NotFoundException;

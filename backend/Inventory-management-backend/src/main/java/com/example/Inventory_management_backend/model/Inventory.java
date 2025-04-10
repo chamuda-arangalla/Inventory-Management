@@ -17,6 +17,7 @@ public class Inventory {
     private StockStatus stockStatus;
 
     @OneToOne
-    private Product product;
+    @JoinColumn(name = "product_id")
+    private Product product;;
 
 }
