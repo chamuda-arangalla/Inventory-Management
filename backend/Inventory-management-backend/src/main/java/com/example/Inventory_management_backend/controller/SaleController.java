@@ -4,10 +4,7 @@ import com.example.Inventory_management_backend.dto.request.SaleRequest;
 import com.example.Inventory_management_backend.dto.response.SaleResponse;
 import com.example.Inventory_management_backend.service.SaleService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -19,5 +16,10 @@ public class SaleController {
     @PostMapping("/")
     public SaleResponse createSale(@RequestBody SaleRequest saleRequest){
      return saleService.createSale(saleRequest);
+    }
+
+    @GetMapping("/")
+    public String pointOfSales(){
+       return saleService.pointOfSales();
     }
 }

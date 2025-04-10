@@ -57,4 +57,17 @@ public class SaleServiceImpl implements SaleService {
                 .totalSale(savedSale.getTotalSale())
                 .build();
     }
+
+    @Override
+    public String pointOfSales() {
+        LocalDate date = LocalDate.now();
+        List<Sale> allSales = saleRepository.findAllByDate(date);
+
+        Double pointOfSales = 0.0;
+
+        for (Sale sale : allSales){
+            pointOfSales += sale.getTotalSale();
+        }
+        return "Point of the Sales of " + date + " is " + pointOfSales;
+    }
 }

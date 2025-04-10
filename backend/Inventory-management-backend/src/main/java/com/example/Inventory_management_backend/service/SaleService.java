@@ -6,4 +6,5 @@ import com.example.Inventory_management_backend.dto.response.SaleResponse;
 public interface SaleService {
 
     SaleResponse createSale(SaleRequest saleRequest);
+    String pointOfSales();
 }
