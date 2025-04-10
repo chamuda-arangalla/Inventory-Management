@@ -24,6 +24,7 @@ public class Product {
     @ManyToOne
     private Supplier supplier;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL) // Auto save
+    @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 }

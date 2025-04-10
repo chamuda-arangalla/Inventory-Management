@@ -20,7 +20,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/save")
-    public ResponseEntity<ProductResponse> save(@RequestBody ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException {
+    public ResponseEntity<ProductResponse> save(@RequestBody ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException, NotFoundException {
         return ResponseEntity.ok(productService.createProduct(productRequest));
     }
 

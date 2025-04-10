@@ -1,12 +1,20 @@
 package com.example.Inventory_management_backend.service.impl;
 
 import com.example.Inventory_management_backend.dto.request.ProductRequest;
+import com.example.Inventory_management_backend.dto.response.InventoryResponse;
 import com.example.Inventory_management_backend.dto.response.ProductResponse;
+import com.example.Inventory_management_backend.dto.response.SupplierResponse;
 import com.example.Inventory_management_backend.exception.AllReadyExistsException;
 import com.example.Inventory_management_backend.exception.InvalidDateException;
 import com.example.Inventory_management_backend.exception.NotFoundException;
+import com.example.Inventory_management_backend.model.Inventory;
 import com.example.Inventory_management_backend.model.Product;
+import com.example.Inventory_management_backend.model.StockStatus;
+import com.example.Inventory_management_backend.model.Supplier;
+import com.example.Inventory_management_backend.repository.InventoryRepository;
 import com.example.Inventory_management_backend.repository.ProductRepository;
+import com.example.Inventory_management_backend.repository.SupplierRepository;
+import com.example.Inventory_management_backend.service.InventoryService;
 import com.example.Inventory_management_backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,21 +28,48 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private SupplierRepository supplierRepository;
+    @Autowired
+    private InventoryRepository inventoryRepository;
+    @Autowired
+    private InventoryService inventoryService;
 
     @Override
-    public ProductResponse createProduct(ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException {
-        // Validate product name exist and expiry date
+    public ProductResponse createProduct(ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException, NotFoundException {
+        // Find supplier exists
+        Supplier supplier = supplierRepository.findById(productRequest.getSupplier().getId()).get();
+        if(supplier == null) {
+            throw new NotFoundException("Supplier not found with id " + productRequest.getSupplier().getId());
+        }
+        // Validate expiry date
         validateProductRequest(productRequest);
 
-        Product product = new Product();
-
+        Product newProduct = new Product();
         // Set product details
-        setProductDetails(productRequest, product);
+        setProductDetails(productRequest, newProduct);
+        // Set supplier
+        newProduct.setSupplier(supplier);
+        // Set product to supplier
+        supplier.getProducts().add(newProduct);
 
-        productRepository.save(product);
+        productRepository.save(newProduct);
 
-        return mapToProductResponse(product);
+        // Create new inventory for the product
+        Inventory newInventory = new Inventory();
+        newInventory.setProduct(newProduct);
+        newInventory.setQuantity(newProduct.getQuantityInStock());
+        newInventory.setStockStatus(getStockStatus(newProduct.getQuantityInStock()));
+
+        inventoryRepository.save(newInventory);
+
+        // Set inventory and supplier
+        newProduct.setInventory(newInventory);
+        productRepository.save(newProduct);
+
+        supplierRepository.save(supplier);
+
+        return mapToProductResponse(newProduct);
 
     }
 
@@ -75,15 +110,10 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(product);
     }
 
-    private void validateProductRequest(ProductRequest productRequest) throws AllReadyExistsException, InvalidDateException {
+    private void validateProductRequest(ProductRequest productRequest) throws InvalidDateException {
 
         LocalDate currentDate = LocalDate.now();
 
-        // Check the product name exists in the database
-        Product existProduct = productRepository.findByProductName(productRequest.getProductName());
-        if (existProduct != null) {
-            throw new AllReadyExistsException("Product already exists");
-        }
         // Check the expiry date is valid
         if(productRequest.getExpiryDate().isBefore(currentDate)){
             throw new InvalidDateException("Expiry Date is invalid");
@@ -109,6 +139,35 @@ public class ProductServiceImpl implements ProductService {
                 .quantityInStock(product.getQuantityInStock())
                 .unitPrice(product.getUnitPrice())
                 .expiryDate(product.getExpiryDate())
+                .supplier(
+                        SupplierResponse.builder()
+                                .id(product.getSupplier().getId())
+                                .name(product.getSupplier().getName())
+                                .address(product.getSupplier().getAddress())
+                                .email(product.getSupplier().getEmail())
+                                .phone(product.getSupplier().getPhone())
+                                .build()
+                )
+                .inventory(
+                        InventoryResponse.builder()
+                                .id(product.getInventory().getId())
+                                .quantity(product.getInventory().getQuantity())
+                                .stockStatus(product.getInventory().getStockStatus())
+                                .build()
+                )
                 .build();
+
+    }
+
+    private StockStatus getStockStatus(int quantityInStock) {
+        if(quantityInStock <= 0) {
+            return StockStatus.OutOfStock;
+        }
+        else if(quantityInStock < 20) {
+            return StockStatus.LowStock;
+        }
+        else{
+            return StockStatus.Active;
+        }
     }
 }
