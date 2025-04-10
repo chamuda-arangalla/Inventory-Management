@@ -1,5 +1,6 @@
 package com.example.Inventory_management_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +20,6 @@ public class Supplier {
     private Long userId;
 
     @OneToMany
+    @JsonManagedReference
     private List<Product> products;
 }
