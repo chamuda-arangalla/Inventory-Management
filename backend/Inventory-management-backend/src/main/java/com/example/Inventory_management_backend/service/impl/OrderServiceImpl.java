@@ -57,4 +57,11 @@ public class OrderServiceImpl implements OrderService {
                 .totalAmount(savedOrder.getTotalAmount())
                 .build();
     }
+
+    @Override
+    public List<Order> getAllOrders() {
+
+        List<Order> foundOrders = orderRepository.findAll();
+        return foundOrders;
+    }
 }
