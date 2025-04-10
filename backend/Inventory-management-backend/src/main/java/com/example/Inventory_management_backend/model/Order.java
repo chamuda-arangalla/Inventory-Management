@@ -24,6 +24,6 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    @JsonManagedReference
+    @JsonIgnore
     private List<Product> products;
 }
