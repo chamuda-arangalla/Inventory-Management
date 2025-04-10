@@ -4,7 +4,10 @@ import com.example.Inventory_management_backend.dto.request.UserRequest;
 import com.example.Inventory_management_backend.dto.response.UserResponse;
 import com.example.Inventory_management_backend.exception.AllReadyExistsException;
 import com.example.Inventory_management_backend.exception.NotFoundException;
+import com.example.Inventory_management_backend.model.Supplier;
 import com.example.Inventory_management_backend.model.User;
+import com.example.Inventory_management_backend.model.UserRole;
+import com.example.Inventory_management_backend.repository.SupplierRepository;
 import com.example.Inventory_management_backend.repository.UserRepository;
 import com.example.Inventory_management_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private SupplierRepository supplierRepository;
+
     @Override
     public UserResponse createUser(UserRequest userRequest) throws AllReadyExistsException {
         // Validate username and email
@@ -28,7 +34,17 @@ public class UserServiceImpl implements UserService {
         // Set user details
         setUserDetails(userRequest, user);
 
-        userRepository.save(user);
+       User savedUser =  userRepository.save(user);
+
+        if (userRequest.getRole() == UserRole.Supplier){
+            Supplier supplier = new Supplier();
+            supplier.setUserId(savedUser.getId());
+            supplier.setName(savedUser.getName());
+            supplier.setEmail(savedUser.getEmail());
+            supplier.setPhone(savedUser.getPhone());
+
+            supplierRepository.save(supplier);
+        }
 
         return mapToUserResponse(user);
     }
@@ -88,6 +104,8 @@ public class UserServiceImpl implements UserService {
         user.setName(userRequest.getName());
         user.setEmail(userRequest.getEmail());
         user.setPhone(userRequest.getPhone());
+        user.setRole(userRequest.getRole());
+
         user.setUsername(userRequest.getUsername());
         user.setPassword(userRequest.getPassword());
     }
@@ -98,6 +116,7 @@ public class UserServiceImpl implements UserService {
                 .name(user.getName())
                 .email(user.getEmail())
                 .phone(user.getPhone())
+                .role(String.valueOf(user.getRole()))
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .build();

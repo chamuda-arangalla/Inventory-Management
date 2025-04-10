@@ -17,6 +17,5 @@ public class ProductRequest {
     private int quantityInStock;
     private Double unitPrice;
     private LocalDate expiryDate;
-    private Supplier supplier;
-    private Inventory inventory;
+    private Long supplierId;
 }
