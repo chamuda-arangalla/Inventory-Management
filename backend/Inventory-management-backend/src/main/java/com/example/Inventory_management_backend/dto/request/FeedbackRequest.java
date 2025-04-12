@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderRequest {
-    private List<Long> productIds;
+public class FeedbackRequest {
+
+    private String feedback;
+    private int starRating;
 }
