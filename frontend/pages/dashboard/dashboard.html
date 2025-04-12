@@ -3,20 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Mangement System</title>
+    <title>InventoryPro | Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <div class="sidebar">
-        <button onclick="loadPage('../forms/item-form.html')">View Items</button>
-        <button onclick="loadPage('../forms/item-form.html')">Add Items</button>
-        <button onclick="loadPage('../forms/supplier-form.html')">Add Supplier</button>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-dark border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading text-white py-4">
+                <h2><i class="fas fa-warehouse me-2"></i>InventoryPro</h2>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white active">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a href="../product/product.html" class="list-group-item list-group-item-action bg-dark text-white ">
+                    <i class="fas fa-box me-2"></i>Products
+
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-shopping-cart me-2"></i>Sales
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-boxes me-2"></i>Inventory
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-users me-2"></i>Customers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-truck me-2"></i>Suppliers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-file-invoice-dollar me-2"></i>Orders
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-chart-line me-2"></i>Reports
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-cog me-2"></i>Settings
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Top Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-sm btn-dark" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge bg-danger rounded-pill">3</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><h6 class="dropdown-header">Notifications</h6></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-circle text-warning me-2"></i>5 items low in stock</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-triangle text-danger me-2"></i>3 items expiring soon</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-truck text-success me-2"></i>New order received</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle"></i> Admin User
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid px-4">
+                <div class="row g-3 my-2">
+                    <!-- Summary Cards -->
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">1,254</h3>
+                                <p class="fs-5 text-muted">Total Sales</p>
+                            </div>
+                            <i class="fas fa-shopping-cart fs-1 p-3 bg-light rounded"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">542</h3>
+                                <p class="fs-5 text-muted">Products</p>
+                            </div>
+                            <i class="fas fa-boxes fs-1 p-3 bg-light rounded"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">124</h3>
+                                <p class="fs-5 text-muted">Customers</p>
+                            </div>
+                            <i class="fas fa-users fs-1 p-3 bg-light rounded"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">$12,543</h3>
+                                <p class="fs-5 text-muted">Revenue</p>
+                            </div>
+                            <i class="fas fa-dollar-sign fs-1 p-3 bg-light rounded"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row my-4">
+                    <div class="col-md-8">
+                        <div class="card shadow">
+                            <div class="card-header bg-white">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5>Sales Overview</h5>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            This Month
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Week</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salesChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <div class="card-header bg-white">
+                                <h5>Inventory Status</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="inventoryChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity & Low Stock Items -->
+                <div class="row my-4">
+                    <div class="col-md-6">
+                        <div class="card shadow">
+                            <div class="card-header bg-white">
+                                <h5>Recent Activity</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush recent-activity">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-shopping-cart text-success me-2"></i>
+                                            <span>New sale #1245 - $245.00</span>
+                                        </div>
+                                        <small class="text-muted">2 mins ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-truck text-primary me-2"></i>
+                                            <span>Order #456 received from Supplier</span>
+                                        </div>
+                                        <small class="text-muted">1 hour ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-user-plus text-info me-2"></i>
+                                            <span>New customer registered</span>
+                                        </div>
+                                        <small class="text-muted">3 hours ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                            <span>Low stock alert for Product A</span>
+                                        </div>
+                                        <small class="text-muted">5 hours ago</small>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-file-invoice-dollar text-secondary me-2"></i>
+                                            <span>Monthly report generated</span>
+                                        </div>
+                                        <small class="text-muted">1 day ago</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                <h5>Low Stock Items</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Category</th>
+                                                <th>Stock</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Premium Coffee Beans</td>
+                                                <td>Beverages</td>
+                                                <td><span class="badge bg-warning">5 left</span></td>
+                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Organic Honey</td>
+                                                <td>Condiments</td>
+                                                <td><span class="badge bg-danger">2 left</span></td>
+                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hand Soap</td>
+                                                <td>Personal Care</td>
+                                                <td><span class="badge bg-warning">7 left</span></td>
+                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Paper Towels</td>
+                                                <td>Household</td>
+                                                <td><span class="badge bg-warning">3 left</span></td>
+                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="main-content" id="content">
-        <h1>Welcome to the Dashboard</h1>
-        <p>Select an option from the sidebar.</p>
-        <iframe id="content-frame" src="home.html" style="width:100%; height:100%; border:none;"></iframe>
-    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>

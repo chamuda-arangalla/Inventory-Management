@@ -5,18 +5,19 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "users")
-public class User {
+@Table(name = "inventory")
+public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String email;
-    private String phone;
-    private String username;
-    private String password;
+    private Integer quantity;
 
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private StockStatus stockStatus;
+
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;;
+
 }

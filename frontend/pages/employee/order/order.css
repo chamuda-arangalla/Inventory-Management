@@ -1,0 +1,537 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    background-color: #f5f7fa;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.3s ease-out;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1.2rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#sidebar-wrapper .list-group-item {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 0;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+#sidebar-wrapper .list-group-item.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    color: #fff;
+    font-weight: 500;
+}
+
+#sidebar-wrapper .list-group-item i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+    background-color: #f5f7fa;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 0.7rem 1.5rem;
+}
+
+#menu-toggle {
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 0.5rem 0;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+}
+
+.dropdown-divider {
+    margin: 0.4rem 0;
+}
+
+.badge {
+    font-size: 0.65rem;
+    padding: 0.25em 0.5em;
+    font-weight: 500;
+}
+
+.navbar .badge {
+    position: relative;
+    top: -8px;
+    left: -5px;
+}
+
+/* Order status badges */
+.badge-pending {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-confirmed {
+    background-color: #198754;
+    color: #fff;
+}
+
+.badge-rejected {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Card styling */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* Action buttons */
+.btn-action {
+    width: 42px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+.pagination .page-link {
+    border-radius: 4px;
+    margin: 0 2px;
+    color: #495057;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Modal styling */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header, .modal-footer {
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Status dot indicator */
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-dot.pending {
+    background-color: #ffc107;
+}
+
+.status-dot.confirmed {
+    background-color: #198754;
+}
+
+.status-dot.rejected {
+    background-color: #dc3545;
+}
+
+/* Actions Button Group */
+.actions-btn-group .btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.actions-btn-group .btn-outline-success:hover,
+.actions-btn-group .btn-outline-danger:hover {
+    color: #fff;
+}
+
+.product-list {
+    font-size: 0.9rem;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+
+    .container-fluid {
+        padding: 1.5rem 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .container-fluid {
+        padding: 1rem;
+    }
+    
+    .card-deck {
+        flex-flow: column;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+}
+
+/* Enhanced Card Styling - with fixed layout */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff, #f5f7fa);
+    width: 100%;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #0d6efd;
+    border-radius: 12px 0 0 12px;
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+.card-body {
+    padding: 15px 20px;
+}
+
+/* Card types - for different metric cards */
+.card.primary::before { background: #0d6efd; }
+.card.success::before { background: #198754; }
+.card.warning::before { background: #ffc107; }
+.card.danger::before { background: #dc3545; }
+
+/* Metrics cards for dashboard */
+.metric-card {
+    text-align: center;
+    padding: 15px;
+}
+
+.metric-card .metric-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(145deg, #0d6efd, #0099ff);
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+}
+
+.metric-card.primary .metric-icon { background: linear-gradient(145deg, #0d6efd, #0099ff); }
+.metric-card.success .metric-icon { background: linear-gradient(145deg, #198754, #28a745); }
+.metric-card.warning .metric-icon { background: linear-gradient(145deg, #ffc107, #ffaa00); }
+.metric-card.danger .metric-icon { background: linear-gradient(145deg, #dc3545, #ff4d5e); }
+
+.metric-card .metric-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: #333;
+}
+
+.metric-card .metric-label {
+    color: #6c757d;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* CSS for arranging cards in a row */
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Enhanced Table Styling */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 12px 25px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.005);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    z-index: 5;
+    position: relative;
+}
+
+.table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Status indicators */
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status.pending {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #9e7d0a;
+}
+
+.status.pending::before {
+    background-color: #ffc107;
+}
+
+.status.confirmed {
+    background-color: rgba(25, 135, 84, 0.15);
+    color: #0f5132;
+}
+
+.status.confirmed::before {
+    background-color: #198754;
+}
+
+.status.rejected {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #842029;
+}
+
+.status.rejected::before {
+    background-color: #dc3545;
+}
+
+/* Action buttons in table */
+.table .btn-action {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+}
+
+.table .btn-action:last-child {
+    margin-right: 0;
+}
+
+.table .btn-action.confirm {
+    background-color: #198754;
+    border-color: #198754;
+    color: white;
+}
+
+.table .btn-action.confirm:hover {
+    background-color: #157347;
+}
+
+.table .btn-action.reject {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.table .btn-action.reject:hover {
+    background-color: #bb2d3b;
+}
+
+/* Order ID column styling */
+.order-id {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Amount column styling */
+.amount {
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Date column styling */
+.date {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+/* Main content container adjustments */
+#page-content-wrapper .container-fluid {
+    padding: 1rem 1.5rem;
+    max-width: 100%;
+}
+
+/* Make the layout responsive */
+@media (max-width: 991.98px) {
+    .metrics-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .table-responsive {
+        border-radius: 12px;
+    }
+    
+    .table th, .table td {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .metrics-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .table th, .table td {
+        white-space: nowrap;
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .table .btn-action {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .status {
+        padding: 3px 8px;
+        font-size: 0.65rem;
+    }
+}
+
+

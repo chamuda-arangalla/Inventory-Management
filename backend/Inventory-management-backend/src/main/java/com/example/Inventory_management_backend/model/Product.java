@@ -1,9 +1,12 @@
 package com.example.Inventory_management_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +22,16 @@ public class Product {
     private int quantityInStock;
     private Double unitPrice;
     private LocalDate expiryDate;
+
+    @ManyToOne
+    @JsonBackReference
+    private Supplier supplier;
+
+    @OneToOne(cascade = CascadeType.ALL) // Auto save
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
+
+    @ManyToMany(mappedBy = "products")
+    @JsonBackReference
+    private List<Order> orders;
 }
