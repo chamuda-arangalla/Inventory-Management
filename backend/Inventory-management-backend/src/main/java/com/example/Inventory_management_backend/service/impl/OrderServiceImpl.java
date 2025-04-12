@@ -59,9 +59,34 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-
+    public List<OrderResponse> getAllOrders() {
         List<Order> foundOrders = orderRepository.findAll();
-        return foundOrders;
+        List<OrderResponse> orderResponses = new ArrayList<>();
+
+        for (Order order : foundOrders) {
+            List<ProductDto> productDtos = new ArrayList<>();
+            for (Product product : order.getProducts()) {
+                ProductDto dto = ProductDto.builder()
+                        .id(product.getId())
+                        .productName(product.getProductName())
+                        .description(product.getDescription())
+                        .category(product.getCategory())
+                        .unitPrice(product.getUnitPrice())
+                        .build();
+                productDtos.add(dto);
+            }
+
+            OrderResponse response = OrderResponse.builder()
+                    .id(order.getId())
+                    .orderDate(order.getOrderDate())
+                    .products(productDtos)
+                    .status(order.getOrderStatus())
+                    .totalAmount(order.getTotalAmount())
+                    .build();
+
+            orderResponses.add(response);
+        }
+
+        return orderResponses;
     }
 }

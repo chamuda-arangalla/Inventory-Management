@@ -70,4 +70,9 @@ public class SaleServiceImpl implements SaleService {
         }
         return "Point of the Sales of " + date + " is " + pointOfSales;
     }
+
+    @Override
+    public List<Sale> getAllSales() {
+        return saleRepository.findAll();
+    }
 }
