@@ -29,9 +29,7 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-boxes me-2"></i>Inventory
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-users me-2"></i>Customers
-                </a>
+
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-truck me-2"></i>Suppliers
                 </a>
@@ -90,7 +88,7 @@
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                     <!-- Summary Cards -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">1,254</h3>
@@ -100,7 +98,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">542</h3>
@@ -108,19 +106,9 @@
                             </div>
                             <i class="fas fa-boxes fs-1 p-3 bg-light rounded"></i>
                         </div>
-                    </div>
+                    </div>                
 
-                    <div class="col-md-3">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2">124</h3>
-                                <p class="fs-5 text-muted">Customers</p>
-                            </div>
-                            <i class="fas fa-users fs-1 p-3 bg-light rounded"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">$12,543</h3>
@@ -131,146 +119,67 @@
                     </div>
                 </div>
 
-                <!-- Charts Row -->
-                <div class="row my-4">
-                    <div class="col-md-8">
-                        <div class="card shadow">
-                            <div class="card-header bg-white">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5>Sales Overview</h5>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                            This Month
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Week</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="salesChart" height="250"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow">
-                            <div class="card-header bg-white">
-                                <h5>Inventory Status</h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="inventoryChart" height="250"></canvas>
-                            </div>
-                        </div>
-                    </div>
+             <!-- Add this inside the container-fluid div where you want to display sales, after the summary cards -->
+<div class="row my-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white border-0">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Recent Sales</h5>
+                    <button class="btn btn-sm btn-primary" id="refreshSales">
+                        <i class="fas fa-sync-alt me-1"></i> Refresh
+                    </button>
                 </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="salesTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Sale ID</th>
+                                <th>Date</th>
+                                <th>Total Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesTableBody">
+                            <!-- Sales data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="text-muted small" id="salesSummary"></div>
+                    <nav aria-label="Sales pagination">
+                        <ul class="pagination pagination-sm mb-0" id="salesPagination">
+                            <!-- Pagination will be added here -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <!-- Recent Activity & Low Stock Items -->
-                <div class="row my-4">
-                    <div class="col-md-6">
-                        <div class="card shadow">
-                            <div class="card-header bg-white">
-                                <h5>Recent Activity</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush recent-activity">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <i class="fas fa-shopping-cart text-success me-2"></i>
-                                            <span>New sale #1245 - $245.00</span>
-                                        </div>
-                                        <small class="text-muted">2 mins ago</small>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <i class="fas fa-truck text-primary me-2"></i>
-                                            <span>Order #456 received from Supplier</span>
-                                        </div>
-                                        <small class="text-muted">1 hour ago</small>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <i class="fas fa-user-plus text-info me-2"></i>
-                                            <span>New customer registered</span>
-                                        </div>
-                                        <small class="text-muted">3 hours ago</small>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <i class="fas fa-exclamation-triangle text-warning me-2"></i>
-                                            <span>Low stock alert for Product A</span>
-                                        </div>
-                                        <small class="text-muted">5 hours ago</small>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <i class="fas fa-file-invoice-dollar text-secondary me-2"></i>
-                                            <span>Monthly report generated</span>
-                                        </div>
-                                        <small class="text-muted">1 day ago</small>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card shadow">
-                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                                <h5>Low Stock Items</h5>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Category</th>
-                                                <th>Stock</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Premium Coffee Beans</td>
-                                                <td>Beverages</td>
-                                                <td><span class="badge bg-warning">5 left</span></td>
-                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Organic Honey</td>
-                                                <td>Condiments</td>
-                                                <td><span class="badge bg-danger">2 left</span></td>
-                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hand Soap</td>
-                                                <td>Personal Care</td>
-                                                <td><span class="badge bg-warning">7 left</span></td>
-                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Paper Towels</td>
-                                                <td>Household</td>
-                                                <td><span class="badge bg-warning">3 left</span></td>
-                                                <td><button class="btn btn-sm btn-outline-success">Reorder</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Sales Chart Section -->
+<div class="row my-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Sales Overview</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="salesChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>

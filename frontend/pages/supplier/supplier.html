@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InventoryPro | Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="supplier.css">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-dark border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading text-white py-4">
+                <h2><i class="fas fa-warehouse me-2"></i>InventoryPro</h2>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white active">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a href="../supplier/product/product.html" class="list-group-item list-group-item-action bg-dark text-white ">
+                    <i class="fas fa-box me-2"></i>Products
+
+                </a>
+                <a href="../supplier/feedback/sup-feedback.html" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-shopping-cart me-2"></i>Feedback
+                </a>
+               
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Top Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-sm btn-dark me-3" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+            
+                    <!-- Dashboard Title -->
+                    <span class="navbar-brand mb-0 text-primary fw-bold ms-5 fs-3">supplier Dashboard</span>
+            
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge bg-danger rounded-pill">3</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><h6 class="dropdown-header">Notifications</h6></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-circle text-warning me-2"></i>5 items low in stock</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-triangle text-danger me-2"></i>3 items expiring soon</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-truck text-success me-2"></i>New order received</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle"></i> Admin User
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Main Content -->
+            <div class="container-fluid px-4">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="supplier.js"></script>
+</body>
+</html>
