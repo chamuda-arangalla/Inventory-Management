@@ -220,6 +220,71 @@
               <!-- Rows will be inserted here by JavaScript -->
             </tbody>
           </table>
+
+          <!-- Order Details Modal -->
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row mb-3">
+                  <div class="col-md-6">
+                      <h6>Order ID: <span id="modalOrderId"></span></h6>
+                      <h6>Order Date: <span id="modalOrderDate"></span></h6>
+                  </div>
+                  <div class="col-md-6">
+                      <h6>Status: <span id="modalOrderStatus" class="badge"></span></h6>
+                      <h6>Total Amount: <span id="modalOrderAmount"></span></h6>
+                  </div>
+              </div>
+              
+              <h5 class="mb-3">Products</h5>
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Product ID</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                              <th>Category</th>
+                              <th>Unit Price</th>
+                          </tr>
+                      </thead>
+                      <tbody id="modalProductsBody">
+                          <!-- Products will be inserted here -->
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="generateReceiptBtn">Generate Receipt</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Receipt Modal -->
+<div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="receiptModalLabel">Order Receipt</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="receiptContent">
+              <!-- Receipt content will be inserted here -->
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" onclick="printReceipt()">Print Receipt</button>
+          </div>
+      </div>
+  </div>
+</div>
         </div>
       </div>
     </div>
@@ -228,5 +293,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="order.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </body>
 </html>
