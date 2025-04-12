@@ -29,6 +29,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
+    @GetMapping("/get-product/{supplierId}")
+    public ResponseEntity<List<ProductResponse>> getProductBySupplierId(@PathVariable long supplierId) throws  NotFoundException {
+        return ResponseEntity.ok(productService.getProductBySupplierId(supplierId));
+    }
+
     @PutMapping("/update/{productId}")
     public ResponseEntity<ProductResponse> updateProduct(@PathVariable long productId, @RequestBody ProductRequest productRequest) throws NotFoundException,AllReadyExistsException, InvalidDateException {
         return ResponseEntity.ok(productService.updateProduct(productId, productRequest));
