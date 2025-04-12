@@ -120,7 +120,7 @@ function showOrderDetails(order) {
     const statusBadge = document.getElementById('modalOrderStatus');
     statusBadge.textContent = order.status;
     statusBadge.className = 'badge ' + (order.status === 'PENDING' ? 'bg-warning text-dark' : 
-                              order.status === 'CONFIRM' ? 'bg-success' : 'bg-secondary');
+                          order.status === 'CONFIRM' ? 'bg-success' : 'bg-secondary');
     
     // Populate products table
     const productsBody = document.getElementById('modalProductsBody');
@@ -138,10 +138,16 @@ function showOrderDetails(order) {
         productsBody.appendChild(row);
     });
     
-    // Set up receipt generation
-    document.getElementById('generateReceiptBtn').onclick = function() {
-        generateReceipt(order);
-    };
+    // Show or hide generate receipt button based on order status
+    const generateReceiptBtn = document.getElementById('generateReceiptBtn');
+    if (order.status === 'CONFIRM') {
+        generateReceiptBtn.style.display = 'inline-block';
+        generateReceiptBtn.onclick = function() {
+            generateReceipt(order);
+        };
+    } else {
+        generateReceiptBtn.style.display = 'none';
+    }
     
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
