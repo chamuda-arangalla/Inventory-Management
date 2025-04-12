@@ -55,21 +55,24 @@ function displayOrders(orders) {
     orders.forEach(order => {
         const row = document.createElement('tr');
         
-        // Format date (handle potential null/undefined)
+        // Format date
         const orderDate = order.orderDate || new Date().toISOString().split('T')[0];
-        const formattedDate = orderDate.split('T')[0]; // Remove time if present
+        const formattedDate = orderDate.split('T')[0];
         
         // Create status badge
         let statusClass = 'badge ';
-        let statusText = order.status || 'PENDING'; // Changed from order.orderStatus to order.status
+        let statusText = order.status || 'PENDING';
         
         if (statusText === 'PENDING') {
             statusClass += 'bg-warning text-dark';
-        } else if (statusText === 'CONFIRM') { // Changed to match your response which has 'CONFIRM'
+        } else if (statusText === 'CONFIRM') {
             statusClass += 'bg-success';
         } else {
             statusClass += 'bg-secondary';
         }
+
+        // Determine if action buttons should be shown
+        const showActions = statusText === 'PENDING';
 
         row.innerHTML = `
             <td class="order-id">#ORD-${order.id.toString().padStart(3, '0')}</td>
@@ -77,14 +80,15 @@ function displayOrders(orders) {
             <td><span class="${statusClass}">${statusText}</span></td>
             <td class="amount">$${(order.totalAmount || 0).toFixed(2)}</td>
             <td class="actions">
-               
+                ${showActions ? `
                 <button class="btn btn-sm btn-success confirm" data-order-id="${order.id}">
                     <i class="fas fa-check"></i> 
                 </button>
                 <button class="btn btn-sm btn-danger reject" data-order-id="${order.id}">
                     <i class="fas fa-times"></i> 
                 </button>
-                 <button class="btn btn-sm btn-primary view-details" data-order-id="${order.id}">
+                ` : ''}
+                <button class="btn btn-sm btn-primary view-details " data-order-id="${order.id}">
                     <i class="fas fa-eye"></i> View
                 </button>
             </td>
@@ -94,9 +98,8 @@ function displayOrders(orders) {
     });
 
     addButtonEventListeners();
-    addViewDetailsListeners(orders); // Add this new function
+    addViewDetailsListeners(orders);
 }
-
 function addViewDetailsListeners(orders) {
     document.querySelectorAll('.view-details').forEach(button => {
         button.addEventListener('click', function() {
@@ -296,3 +299,96 @@ function updateOrderStatus(orderId, status) {
         fetchOrders();
     }
 }
+
+function addButtonEventListeners() {
+    // Confirm button event listeners
+    document.querySelectorAll('.confirm').forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-order-id');
+            
+            Swal.fire({
+                title: 'Confirm Order',
+                text: 'Are you sure you want to confirm this order?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, confirm it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('http://localhost:8082/api/v1/sale/', { orderId: parseInt(orderId) })
+                        .then(response => {
+                            Swal.fire(
+                                'Confirmed!',
+                                'Order has been confirmed and sale created.',
+                                'success'
+                            ).then(() => {
+                                // Refresh the orders table
+                                fetchOrders();
+                            });
+                        })
+                        .catch(error => {
+                            Swal.fire(
+                                'Error!',
+                                error.response?.data?.message || error.message,
+                                'error'
+                            );
+                        });
+                }
+            });
+        });
+    });
+    
+    // Reject button event listeners
+    document.querySelectorAll('.reject').forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-order-id');
+            const row = this.closest('tr');
+            
+            Swal.fire({
+                title: 'Reject Order',
+                text: 'Are you sure you want to reject this order?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reject it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Just remove the row from the UI without calling the backend
+                    row.remove();
+                    
+                    // Show success message
+                    Swal.fire(
+                        'Rejected!',
+                        'Order has been rejected.',
+                        'success'
+                    );
+                    
+                    // If no orders left, show the "No orders" message
+                    if (document.querySelectorAll('table tbody tr').length === 0) {
+                        const tbody = document.querySelector('table tbody');
+                        tbody.innerHTML = '<tr><td colspan="5" class="text-center">No orders found</td></tr>';
+                    }
+                }
+            });
+        });
+    });
+}
+
+// async function fetchOrdersAndDisplay() {
+//     try {
+//         const response = await axios.get('/api/v1/orders');
+//         displayOrders(response.data);
+//     } catch (error) {
+//         console.error('Error fetching orders:', error);
+//         const tbody = document.querySelector('table tbody');
+//         tbody.innerHTML = '<tr><td colspan="5" class="text-center">Error loading orders</td></tr>';
+        
+//         Swal.fire(
+//             'Error!',
+//             error.response?.data?.message || error.message,
+//             'error'
+//         );
+//     }
+// }
