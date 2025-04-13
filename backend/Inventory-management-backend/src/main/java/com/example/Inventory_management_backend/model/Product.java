@@ -21,6 +21,7 @@ public class Product {
     private int quantityInStock;
     private Double unitPrice;
     private LocalDate expiryDate;
+    private boolean status;
 
     @ManyToOne
     @JsonBackReference
