@@ -13,6 +13,7 @@ import com.example.Inventory_management_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,6 +85,45 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new NotFoundException("User not found with id " + userId));
 
         userRepository.delete(user);
+    }
+
+    @Override
+    public List<UserResponse> getAllEmployees() {
+        List<User> users = userRepository.findAll();
+        List<User> employees = new ArrayList<>();
+
+        for(int i=0; i<users.size(); i++){
+            if(users.get(i).getRole() == UserRole.Employee){
+                employees.add(users.get(i));
+            }
+        }
+        return employees.stream().map(this::mapToUserResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserResponse> getAllSuppliers() {
+        List<User> users = userRepository.findAll();
+        List<User> suppliers = new ArrayList<>();
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getRole() == UserRole.Supplier) {
+                suppliers.add(users.get(i));
+            }
+        }
+        return suppliers.stream().map(this::mapToUserResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserResponse> getAllManagers() {
+        List<User> users = userRepository.findAll();
+        List<User> managers = new ArrayList<>();
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getRole() == UserRole.Manager) {
+                managers.add(users.get(i));
+            }
+        }
+        return managers.stream().map(this::mapToUserResponse).collect(Collectors.toList());
     }
 
     private void validateUserRequest(UserRequest userRequest) throws AllReadyExistsException {

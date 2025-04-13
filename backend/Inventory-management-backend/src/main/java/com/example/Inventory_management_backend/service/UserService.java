@@ -15,4 +15,7 @@ public interface UserService {
     UserResponse updateUser(long userId, UserRequest userRequest) throws NotFoundException, AllReadyExistsException;
     UserResponse getUser(long userId) throws NotFoundException;
     void deleteUser(long userId) throws NotFoundException;
+    List<UserResponse> getAllEmployees();
+    List<UserResponse> getAllSuppliers();
+    List<UserResponse> getAllManagers();
 }
