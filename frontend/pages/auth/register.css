@@ -1,0 +1,231 @@
+/* Register Page CSS */
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #f3f4f6;
+    --accent-color: #10b981;
+    --text-color: #374151;
+    --light-text-color: #9ca3af;
+    --dark-text-color: #1f2937;
+    --danger-color: #ef4444;
+    --card-shadow: 0 10px 25px rgba(99, 102, 241, 0.1);
+    --input-bg: #f9fafb;
+    --border-radius: 12px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f6f7ff 0%, #e3e9ff 100%);
+    color: var(--text-color);
+}
+
+.register-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    padding: 2rem;
+    background: white;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.register-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+}
+
+.logo-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+.welcome-text {
+    font-weight: 700;
+    color: var(--dark-text-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-floating .form-control,
+.form-floating .form-select {
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    padding: 1rem 1rem 1rem 2.5rem;
+    height: 60px;
+    background-color: var(--input-bg);
+    transition: all 0.2s ease;
+}
+
+.form-floating .form-control:focus,
+.form-floating .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+}
+
+.form-floating label {
+    padding-left: 1rem;
+    color: var(--light-text-color);
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: var(--light-text-color);
+    cursor: pointer;
+    padding: 0;
+    z-index: 5;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.login-link, .terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.login-link:hover, .terms-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.social-register {
+    position: relative;
+}
+
+.social-register p {
+    position: relative;
+    z-index: 1;
+}
+
+.social-register p:before, .social-register p:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background-color: #e5e7eb;
+}
+
+.social-register p:before {
+    left: 0;
+}
+
+.social-register p:after {
+    right: 0;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+}
+
+.google {
+    background-color: #EA4335;
+}
+
+.facebook {
+    background-color: #1877F2;
+}
+
+.twitter {
+    background-color: #1DA1F2;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Password strength indicator */
+.password-strength {
+    height: 5px;
+    border-radius: 5px;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.strength-weak {
+    width: 33%;
+    background-color: var(--danger-color);
+}
+
+.strength-medium {
+    width: 66%;
+    background-color: #f59e0b;
+}
+
+.strength-strong {
+    width: 100%;
+    background-color: var(--accent-color);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.register-card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .register-card {
+        padding: 1.5rem;
+    }
+    
+    .logo-container {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo-icon {
+        font-size: 1.5rem;
+    }
+}
