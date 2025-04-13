@@ -14,5 +14,6 @@ public interface ProductService {
     List<ProductResponse> getAllProducts();
     ProductResponse updateProduct(long productId, ProductRequest productRequest) throws NotFoundException, AllReadyExistsException, InvalidDateException;
     ProductResponse getProduct(long productId) throws NotFoundException;
+    List<ProductResponse> getProductBySupplierId(long supplierId) throws NotFoundException;
     void deleteProduct(long productId) throws NotFoundException;
 }

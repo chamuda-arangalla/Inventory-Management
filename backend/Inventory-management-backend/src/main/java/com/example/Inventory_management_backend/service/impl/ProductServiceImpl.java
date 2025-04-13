@@ -106,6 +106,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductResponse> getProductBySupplierId(long supplierId) throws NotFoundException {
+        // Find the supplier first
+        Supplier supplier = supplierRepository.findById(supplierId)
+                .orElseThrow(() -> new NotFoundException("Supplier not found with id " + supplierId));
+
+        // Retrieve the list of products via the supplier's relationship
+        List<Product> products = supplier.getProducts();
+
+        // Check if the supplier has any products
+        if (products == null || products.isEmpty()) {
+            throw new NotFoundException("No products found for supplier id " + supplierId);
+        }
+
+        // Map products to ProductResponse DTOs
+        return products.stream().map(this::mapToProductResponse).collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteProduct(long productId) throws NotFoundException {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found with product id: " + productId));

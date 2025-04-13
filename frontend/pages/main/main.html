@@ -15,16 +15,16 @@
                     Login
                     <span class="underline"></span>
                 </button>
-                <form class="form form-login">
+                <form class="form form-login" action="../dashboard/dashboard.html">
                     <fieldset>
                         <legend>Please, enter your employee Id and password for login.</legend>
                         <div class="input-block">
                             <label for="login-employeeId">Employee Id</label>
-                            <input id="login-employeeId" type="employeeId" required>
+                            <input id="login-employeeId" type="employeeId" >
                         </div>
                         <div class="input-block">
                             <label for="login-password">Password</label>
-                            <input id="login-password" type="password" required>
+                            <input id="login-password" type="password" >
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-login">Login</button>
@@ -45,6 +45,10 @@
                         <div class="input-block">
                             <label for="signup-name">Name</label>
                             <input id="signup-name" type="name" required>
+                        </div>
+                        <div class="input-block">
+                            <label for="signup-email">Email</label>
+                            <input id="signup-email" type="email" required>
                         </div>
                         <div class="input-block">
                             <label for="signup-password">Password</label>
