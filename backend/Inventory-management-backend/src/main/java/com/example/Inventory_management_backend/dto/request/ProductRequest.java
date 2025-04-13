@@ -2,6 +2,7 @@ package com.example.Inventory_management_backend.dto.request;
 
 import com.example.Inventory_management_backend.model.Inventory;
 import com.example.Inventory_management_backend.model.Supplier;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;

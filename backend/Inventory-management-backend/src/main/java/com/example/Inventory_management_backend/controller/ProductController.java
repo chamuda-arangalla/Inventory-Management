@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/product")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class ProductController {
 
     private final ProductService productService;
@@ -29,7 +30,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
-    @GetMapping("/get-product/{supplierId}")
+    @GetMapping("/sup-product/{supplierId}")
     public ResponseEntity<List<ProductResponse>> getProductBySupplierId(@PathVariable long supplierId) throws  NotFoundException {
         return ResponseEntity.ok(productService.getProductBySupplierId(supplierId));
     }
