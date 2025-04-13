@@ -194,28 +194,70 @@ function initEditModal() {
 // Call this when page loads
 document.addEventListener('DOMContentLoaded', initEditModal);
 function updateProduct() {
+    // Get form values
     const productId = document.getElementById('editProductId').value;
-    const supplierId = document.getElementById('editSupplierId').value;
     const productData = {
-        supplierId: parseInt(supplierId),
         productName: document.getElementById('editProductName').value,
         description: document.getElementById('editDescription').value,
         category: document.getElementById('editCategory').value,
         quantityInStock: parseInt(document.getElementById('editQuantity').value),
         unitPrice: parseFloat(document.getElementById('editPrice').value),
-        expiryDate: document.getElementById('editExpiryDate').value
+        expiryDate: document.getElementById('editExpiryDate').value,
+        supplierId: parseInt(document.getElementById('editSupplierId').value)
     };
-    
+
+    // Show loading alert
+    Swal.fire({
+        title: 'Updating Product',
+        html: 'Please wait while we update your product...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // Make the API call
     axios.put(`http://localhost:8082/api/v1/product/update/${productId}`, productData)
         .then(response => {
-            // Close modal and refresh table
+            // Success notification
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Product updated successfully',
+                confirmButtonColor: '#3085d6',
+                background: '#f8f9fa',
+                backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("/images/nyan-cat.gif")
+                    left top
+                    no-repeat
+                `
+            });
+            
+            // Close the modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
             modal.hide();
-            loadProducts(supplierId);
+            
+            // Refresh the product list
+            loadProducts(productData.supplierId);
         })
         .catch(error => {
-            console.error('Error updating product:', error);
-            alert('Error updating product: ' + (error.response?.data?.message || error.message));
+            // Error notification
+            let errorMessage = 'Failed to update product';
+            if (error.response) {
+                errorMessage = error.response.data.message || errorMessage;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Update Failed',
+                text: errorMessage,
+                confirmButtonColor: '#d33',
+                background: '#f8f9fa',
+                showClass: {
+                    popup: 'animate__animated animate__shakeX'
+                }
+            });
         });
 }
 
