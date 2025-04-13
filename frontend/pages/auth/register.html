@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Create Your Account</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100 py-5">
+            <div class="col-md-8">
+                <div class="card register-card">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="logo-container">
+                                <i class="fas fa-user-plus logo-icon"></i>
+                            </div>
+                            <h2 class="welcome-text">Create Account</h2>
+                            <p class="text-muted">Join our community today</p>
+                        </div>
+                        
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name" placeholder="Full Name" required>
+                                        <label for="name"><i class="fas fa-user me-2"></i>Full Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                        <label for="email"><i class="fas fa-envelope me-2"></i>Email</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
+                                        <label for="phone"><i class="fas fa-phone me-2"></i>Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                        <label for="username"><i class="fas fa-user-circle me-2"></i>Username</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 password-container">
+                                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                        <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 password-container">
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                                        <label for="confirmPassword"><i class="fas fa-lock me-2"></i>Confirm Password</label>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-floating mb-">
+                                <select class="form-select" id="role" required>
+                                    <option value="" selected disabled>Select a role</option>
+                                    <option value="USER">Employee</option>    
+                                    <option value="ADMIN">Manager</option>       
+                                    <option value="MODERATOR">Supplier</option> 
+                                </select>
+                                <label for="role"><i class="fas fa-user-tag me-2"></i>Choose Your Role</label>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-3 mb-3">
+                                <i class="fas fa-user-plus me-2"></i>Create Account
+                            </button>
+                            
+                            <div class="text-center mt-3">
+                                <p>Already have an account? <a href="login.html" class="login-link">Sign In</a></p>
+                            </div>
+                        </form>
+                        
+                        <div class="social-register mt-4">
+                            <p class="text-center text-muted">Or register with</p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="#" class="social-btn google">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="#" class="social-btn facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-btn twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="register.js"></script>
+    <script>
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const icon = document.querySelector(`#${fieldId} + label + .password-toggle i`);
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+    <!-- Add these script tags in the head or before the closing body tag -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/register.js"></script>
+</body>
+</html>
