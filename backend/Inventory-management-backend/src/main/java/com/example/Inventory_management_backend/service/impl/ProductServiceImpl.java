@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,6 +54,8 @@ public class ProductServiceImpl implements ProductService {
         setProductDetails(productRequest, newProduct);
         // Set supplier
         newProduct.setSupplier(foundSupplier);
+        // Set product status
+        newProduct.setStatus(true);
         // Set product to supplier
         foundSupplier.getProducts().add(newProduct);
 
@@ -79,7 +82,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> getAllProducts() {
         List<Product> products = productRepository.findAll();
-        return products.stream().map(this::mapToProductResponse).collect(Collectors.toList());
+        // Check product available
+        List<Product> availableProducts = checkStatus(products);
+
+        return availableProducts.stream().map(this::mapToProductResponse).collect(Collectors.toList());
     }
 
     @Override
@@ -87,14 +93,18 @@ public class ProductServiceImpl implements ProductService {
         Product existingProduct = productRepository.findById((productId))
                 .orElseThrow(() -> new NotFoundException("Product not found with id: " + productId));
 
-        // Validate product name exist and expiry date
-        validateProductRequest(productRequest);
-        // Set product details
-        setProductDetails(productRequest, existingProduct);
+        if(existingProduct.isStatus() == true) {
 
-        productRepository.save(existingProduct);
+            // Validate product name exist and expiry date
+            validateProductRequest(productRequest);
+            // Set product details
+            setProductDetails(productRequest, existingProduct);
 
-        return mapToProductResponse(existingProduct);
+            productRepository.save(existingProduct);
+
+            return mapToProductResponse(existingProduct);
+        }
+        else throw new RuntimeException("Out of stock!!");
     }
 
     @Override
@@ -102,7 +112,10 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found with product id: " + productId));
 
-        return mapToProductResponse(product);
+        if(product.isStatus() == true) {
+            return mapToProductResponse(product);
+        }
+        else throw new RuntimeException("Out of stock!!");
     }
 
     @Override
@@ -118,9 +131,12 @@ public class ProductServiceImpl implements ProductService {
         if (products == null || products.isEmpty()) {
             throw new NotFoundException("No products found for supplier id " + supplierId);
         }
-
-        // Map products to ProductResponse DTOs
-        return products.stream().map(this::mapToProductResponse).collect(Collectors.toList());
+        else {
+            // Check product available
+            List<Product> availableProducts = checkStatus(products);
+            // Map products to ProductResponse DTOs
+            return availableProducts.stream().map(this::mapToProductResponse).collect(Collectors.toList());
+        }
     }
 
     @Override
@@ -128,7 +144,9 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found with product id: " + productId));
 
-        productRepository.delete(product);
+        // Set product status false
+        product.setStatus(false);
+        productRepository.save(product);
     }
 
     private void validateProductRequest(ProductRequest productRequest) throws InvalidDateException {
@@ -200,5 +218,16 @@ public class ProductServiceImpl implements ProductService {
         else{
             return StockStatus.Active;
         }
+    }
+
+    private List<Product> checkStatus(List<Product> products){
+
+        List<Product> productList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            if(products.get(i).isStatus() == true){
+                productList.add(products.get(i));
+            }
+        }
+        return productList;
     }
 }
