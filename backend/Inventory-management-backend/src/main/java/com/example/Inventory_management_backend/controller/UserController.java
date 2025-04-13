@@ -44,4 +44,18 @@ public class UserController {
         return ResponseEntity.ok("User deleted successfully");
     }
 
+    @GetMapping("/all-employees")
+    public ResponseEntity<List<UserResponse>> getAllEmployees() {
+        return ResponseEntity.ok(userService.getAllEmployees());
+    }
+
+    @GetMapping("/all-suppliers")
+    public ResponseEntity<List<UserResponse>> getAllSuppliers() {
+        return ResponseEntity.ok(userService.getAllSuppliers());
+    }
+
+    @GetMapping("/all-managers")
+    public ResponseEntity<List<UserResponse>> getAllManagers(){
+        return ResponseEntity.ok(userService.getAllManagers());
+    }
 }
