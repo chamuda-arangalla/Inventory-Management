@@ -1,182 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InventoryPro | Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-dark border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading text-white py-4">
-                <h2><i class="fas fa-warehouse me-2"></i>InventoryPro</h2>
-            </div>
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white active">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
-                <a href="../dashboard/products/man-product.html" class="list-group-item list-group-item-action bg-dark text-white ">
-                    <i class="fas fa-box me-2"></i>Products
-
-                </a>
-                <a href="../dashboard/feedback/man-feedback.html" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-shopping-cart me-2"></i>Feedback
-                </a>
-                
-
-                <a href="../dashboard/suppliers/man-supplier.html" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-truck me-2"></i>Suppliers
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-truck me-2"></i>Employees
-                </a>
-               
-            </div>
+      <!-- Sidebar -->
+      <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading text-white py-4">
+          <h2><i class="fas fa-warehouse me-2"></i>InventoryPro</h2>
         </div>
+        <div class="list-group list-group-flush">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-dark text-white active"
+          >
+            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+          </a>
+          <a
+            href="../dashboard/products/man-product.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-box me-2"></i>Products
+          </a>
+          <a
+            href="../dashboard/feedback/man-feedback.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-shopping-cart me-2"></i>Feedback
+          </a>
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <!-- Top Navigation -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-sm btn-dark" id="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="badge bg-danger rounded-pill">0</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><h6 class="dropdown-header">Notifications</h6></li>
-                                  
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-user-circle"></i> Admin User
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+          <a
+            href="../dashboard/suppliers/man-supplier.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-truck me-2"></i>Suppliers
+          </a>
 
-            <!-- Main Content -->
-            <div class="container-fluid px-4">
-                <div class="row g-3 my-2">
-                    <!-- Summary Cards -->
-                    <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2">1,254</h3>
-                                <p class="fs-5 text-muted">Total Sales</p>
-                            </div>
-                            <i class="fas fa-shopping-cart fs-1 p-3 bg-light rounded"></i>
-                        </div>
-                    </div>
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-truck me-2"></i>Employees
+          </a>
+        </div>
+      </div>
 
-                    <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2">542</h3>
-                                <p class="fs-5 text-muted">Products</p>
-                            </div>
-                            <i class="fas fa-boxes fs-1 p-3 bg-light rounded"></i>
-                        </div>
-                    </div>                
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <!-- Top Navigation -->
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <div class="container-fluid">
+            <button class="btn btn-sm btn-dark" id="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
 
-                    <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2">$12,543</h3>
-                                <p class="fs-5 text-muted">Point of Sales</p>
-                            </div>
-                            <i class="fas fa-dollar-sign fs-1 p-3 bg-light rounded"></i>
-                        </div>
-                    </div>
-                </div>
-
-             <!-- Add this inside the container-fluid div where you want to display sales, after the summary cards -->
-<div class="row my-4">
-    <div class="col-12">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white border-0">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Recent Sales</h5>
-                    <div>
-                        <button class="btn btn-sm btn-success me-2" id="generateReport">
-                            <i class="fas fa-file-pdf me-1"></i> Weekly Report
-                        </button>
-                    </div>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <i class="fas fa-bell"></i>
+                    <span class="badge bg-danger rounded-pill">0</span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><h6 class="dropdown-header">Notifications</h6></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="userDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <i class="fas fa-user-circle"></i> Admin User
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        ><i class="fas fa-user me-2"></i>Profile</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        ><i class="fas fa-cog me-2"></i>Settings</a
+                      >
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        ><i class="fas fa-sign-out-alt me-2"></i>Logout</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover" id="salesTable">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Sale ID</th>
-                                <th>Date</th>
-                                <th>Total Amount</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="salesTableBody">
-                            <!-- Sales data will be loaded here -->
-                        </tbody>
-                    </table>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container-fluid px-4">
+          <div class="row g-3 my-2">
+            <!-- Summary Cards -->
+            <div class="col-md-4">
+              <div
+                class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded"
+              >
+                <div>
+                  <h3 class="fs-2">1,254</h3>
+                  <p class="fs-5 text-muted">Total Sales</p>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mt-3">
+                <i class="fas fa-shopping-cart fs-1 p-3 bg-light rounded"></i>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div
+                class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded"
+              >
+                <div>
+                  <h3 class="fs-2">542</h3>
+                  <p class="fs-5 text-muted">Products</p>
+                </div>
+                <i class="fas fa-boxes fs-1 p-3 bg-light rounded"></i>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div
+                class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded"
+              >
+                <div>
+                  <h3 class="fs-2">$12,543</h3>
+                  <p class="fs-5 text-muted">Point of Sales</p>
+                </div>
+                <i class="fas fa-dollar-sign fs-1 p-3 bg-light rounded"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add this inside the container-fluid div where you want to display sales, after the summary cards -->
+          <div class="row my-4">
+            <div class="col-12">
+              <div class="card shadow-sm">
+                <div class="card-header bg-white border-0">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h5 class="mb-0">
+                      <i class="fas fa-shopping-cart me-2"></i>Recent Sales
+                    </h5>
+                    <div>
+                      <button
+                        class="btn btn-sm btn-success me-2"
+                        id="generateReport"
+                      >
+                        <i class="fas fa-file-pdf me-1"></i> Weekly Report
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover" id="salesTable">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Sale ID</th>
+                          <th>Date</th>
+                          <th>Total Amount</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="salesTableBody">
+                        <!-- Sales data will be loaded here -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <div
+                    class="d-flex justify-content-between align-items-center mt-3"
+                  >
                     <div class="text-muted small" id="salesSummary"></div>
                     <nav aria-label="Sales pagination">
-                        <ul class="pagination pagination-sm mb-0" id="salesPagination">
-                            <!-- Pagination will be added here -->
-                        </ul>
+                      <ul
+                        class="pagination pagination-sm mb-0"
+                        id="salesPagination"
+                      >
+                        <!-- Pagination will be added here -->
+                      </ul>
                     </nav>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
 
-<!-- Sales Chart Section -->
-<div class="row my-4">
-    <div class="col-12">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white border-0">
-                <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Sales Overview</h5>
+          <!-- Sales Chart Section -->
+          <div class="row my-4">
+            <div class="col-12">
+              <div class="card shadow-sm">
+                <div class="card-header bg-white border-0">
+                  <h5 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>Sales Overview
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <canvas id="salesChart" height="300"></canvas>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-                <canvas id="salesChart" height="300"></canvas>
-            </div>
+          </div>
         </div>
-    </div>
-</div>
-            </div>
-        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="dashboard.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-<script src="dashboard.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
 </html>
