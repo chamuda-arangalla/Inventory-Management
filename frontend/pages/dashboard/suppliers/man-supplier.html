@@ -1,267 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InventoryPro | Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="man-supplier.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="man-supplier.css" />
     <style>
+      #sidebar-wrapper {
+        min-height: 100vh;
+        margin-left: -15rem;
+        transition: margin 0.25s ease-out;
+      }
+
+      #sidebar-wrapper .sidebar-heading {
+        padding: 0.875rem 1.25rem;
+        font-size: 1.2rem;
+      }
+
+      #sidebar-wrapper .list-group {
+        width: 15rem;
+      }
+
+      #page-content-wrapper {
+        min-width: 100vw;
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+      }
+
+      @media (min-width: 768px) {
         #sidebar-wrapper {
-            min-height: 100vh;
-            margin-left: -15rem;
-            transition: margin 0.25s ease-out;
+          margin-left: 0;
         }
-        
-        #sidebar-wrapper .sidebar-heading {
-            padding: 0.875rem 1.25rem;
-            font-size: 1.2rem;
-        }
-        
-        #sidebar-wrapper .list-group {
-            width: 15rem;
-        }
-        
+
         #page-content-wrapper {
-            min-width: 100vw;
+          min-width: 0;
+          width: 100%;
         }
-        
+
         #wrapper.toggled #sidebar-wrapper {
-            margin-left: 0;
+          margin-left: -15rem;
         }
-        
-        @media (min-width: 768px) {
-            #sidebar-wrapper {
-                margin-left: 0;
-            }
-            
-            #page-content-wrapper {
-                min-width: 0;
-                width: 100%;
-            }
-            
-            #wrapper.toggled #sidebar-wrapper {
-                margin-left: -15rem;
-            }
-        }
-        
-        .card {
-            transition: transform 0.2s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .employee-card {
-            border-left: 4px solid #0d6efd;
-        }
+      }
+
+      .card {
+        transition: transform 0.2s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .employee-card {
+        border-left: 4px solid #0d6efd;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-dark border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading text-white py-4">
-                <h2><i class="fas fa-warehouse me-2"></i>InventoryPro</h2>
-            </div>
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white active">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
-                <a href="../dashboard/products/man-product.html" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-box me-2"></i>Products
-                </a>
-                <a href="../dashboard/feedback/man-feedback.html" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-shopping-cart me-2"></i>Feedback
-                </a>
-                <a href="../dashboard/suppliers/man-supplier.html" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-truck me-2"></i>Suppliers
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-users me-2"></i>Employees
-                </a>
-            </div>
+      <!-- Sidebar -->
+      <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading text-white py-4">
+          <h2><i class="fas fa-warehouse me-2"></i>InventoryPro</h2>
         </div>
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <!-- Top Navigation -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-sm btn-dark" id="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="badge bg-danger rounded-pill">3</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><h6 class="dropdown-header">Notifications</h6></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-circle text-warning me-2"></i>5 items low in stock</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-triangle text-danger me-2"></i>3 items expiring soon</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-truck text-success me-2"></i>New order received</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-user-circle"></i> Admin User
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Main Content -->
-            <div class="container-fluid px-4">
-                <div class="row my-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                                <h4 class="mb-0"><i class="fas fa-users me-2"></i>Employees</h4>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
-                                    <i class="fas fa-plus me-2"></i>Add Employee
-                                </button>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover" id="employeesTable">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Role</th>
-                                                <th>Username</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="employeesTableBody">
-                                            <!-- Employees will be loaded here -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="list-group list-group-flush">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-dark text-white active"
+          >
+            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+          </a>
+          <a
+            href="../products/man-product.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-box me-2"></i>Products
+          </a>
+          <a
+            href="../feedback/man-feedback.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-shopping-cart me-2"></i>Feedback
+          </a>
+          <a
+            href="../suppliers/man-supplier.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-truck me-2"></i>Suppliers
+          </a>
+          <a
+            href="../man-employee/man-employee.html"
+            class="list-group-item list-group-item-action bg-dark text-white"
+          >
+            <i class="fas fa-users me-2"></i>Employees
+          </a>
         </div>
+      </div>
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <!-- Top Navigation -->
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <div class="container-fluid">
+            <button class="btn btn-sm btn-dark" id="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <i class="fas fa-bell"></i>
+                    <span class="badge bg-danger rounded-pill">0</span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><h6 class="dropdown-header">Notifications</h6></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="userDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                  >
+                    <i class="fas fa-user-circle"></i> Admin User
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        ><i class="fas fa-user me-2"></i>Profile</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        ><i class="fas fa-cog me-2"></i>Settings</a
+                      >
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#"
+                        ><i class="fas fa-sign-out-alt me-2"></i>Logout</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container-fluid px-4">
+          <div class="row my-4">
+            <div class="col-12">
+              <div class="card">
+                <div
+                  class="card-header bg-white d-flex justify-content-between align-items-center"
+                >
+                  <h4 class="mb-0">
+                    <i class="fas fa-users me-2"></i>Suppliers
+                  </h4>
+                  <button
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addEmployeeModal"
+                  >
+                    <i class="fas fa-plus me-2"></i>Add Supllier
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover" id="employeesTable">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Role</th>
+                          <th>Username</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="employeesTableBody">
+                        <!-- Employees will be loaded here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Add Employee Modal -->
-    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="addEmployeeForm">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="role" class="form-label">Role</label>
-                            <select class="form-select" id="role" required>
-                                <option value="Employee">Employee</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Supplier">Supplier</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">Save Employee</button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="addEmployeeModal"
+      tabindex="-1"
+      aria-labelledby="addEmployeeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addEmployeeModalLabel">
+              Add New Employee
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addEmployeeForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" required />
+              </div>
+              <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select class="form-select" id="role" required>
+                  <option value="Employee">Employee</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Supplier">Supplier</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="saveEmployeeBtn">
+              Save Employee
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Edit Employee Modal -->
-    <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editEmployeeForm">
-                        <input type="hidden" id="editId">
-                        <div class="mb-3">
-                            <label for="editName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPhone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="editPhone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editRole" class="form-label">Role</label>
-                            <select class="form-select" id="editRole" required>
-                                <option value="Employee">Employee</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Supplier">Supplier</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="editUsername" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="editPassword" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateEmployeeBtn">Update Employee</button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="editEmployeeModal"
+      tabindex="-1"
+      aria-labelledby="editEmployeeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editEmployeeModalLabel">
+              Edit Employee
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="editEmployeeForm">
+              <input type="hidden" id="editId" />
+              <div class="mb-3">
+                <label for="editName" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editEmail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="editEmail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editPhone" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editPhone"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editRole" class="form-label">Role</label>
+                <select class="form-select" id="editRole" required>
+                  <option value="Employee">Employee</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Supplier">Supplier</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="editUsername" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editUsername"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editPassword" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="editPassword"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="updateEmployeeBtn"
+            >
+              Update Employee
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="man-supplier.js"></script>
-</body>
+  </body>
 </html>

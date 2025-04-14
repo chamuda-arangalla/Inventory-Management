@@ -32,7 +32,7 @@ function initSalesDashboard() {
 
 async function fetchSalesData() {
     try {
-        const response = await axios.get('http://localhost:8082/api/v1/sale/all');
+        const response = await axios.get('http://localhost:8080/api/v1/sale/all');
         const salesData = response.data;
         
         displaySalesTable(salesData);
@@ -180,7 +180,7 @@ function formatCurrency(amount) {
 // Update your fetchSalesData function to use this
 async function fetchSalesData() {
     try {
-        const response = await axios.get('http://localhost:8082/api/v1/sale/all');
+        const response = await axios.get('http://localhost:8080/api/v1/sale/all');
         const salesData = response.data;
         
         displaySalesTable(salesData);
@@ -363,7 +363,7 @@ async function generateWeeklyReport() {
         const formatDate = (date) => date.toISOString().split('T')[0];
         
         // Fetch sales data for the week
-        const response = await axios.get(`http://localhost:8082/api/v1/sale/all?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}`);
+        const response = await axios.get(`http://localhost:8080/api/v1/sale/all?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}`);
         const weeklySales = response.data;
 
         if (weeklySales.length === 0) {
@@ -480,7 +480,7 @@ function checkAuthentication() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     
     if (!userData) {
-        window.location.href = '../login.html';
+        window.location.href = '../auth/login.html';
         return;
     }
     
@@ -556,7 +556,7 @@ const notificationBadge = notificationBell.querySelector('.badge');
 
 // Function to fetch notifications from the backend
 function fetchNotifications() {
-  axios.get('http://localhost:8082/api/v1/notifications/')
+  axios.get('http://localhost:8080/api/v1/notifications/')
     .then(response => {
       // Get the expiring product notifications from the response
       const notifications = response.data;
