@@ -1,4 +1,3 @@
-
         document.addEventListener('DOMContentLoaded', function() {
             // Sidebar toggle functionality
             const menuToggle = document.getElementById('menu-toggle');
@@ -9,6 +8,9 @@
                     wrapper.classList.toggle('toggled');
                 });
             }
+
+            // Load user data and display in navbar
+            displayUserInNavbar();
 
             // Load employees when page loads
             loadEmployees();

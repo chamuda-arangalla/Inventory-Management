@@ -24,6 +24,31 @@ function initProductManagement() {
     });
 }
 
+// Function to display user in navbar
+function displayUserInNavbar() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (!userData) return;
+    
+    const userDropdown = document.querySelector('#userDropdown');
+    if (userDropdown) {
+        // Update the username display
+        userDropdown.innerHTML = `
+            <i class="fas fa-user-circle"></i> ${userData.username}
+            <span class="badge bg-primary ms-2">${capitalizeFirstLetter(userData.role)}</span>
+        `;
+        
+        // Update the dropdown menu with user-specific options
+        const dropdownMenu = userDropdown.nextElementSibling;
+        dropdownMenu.innerHTML = `
+            <li><h6 class="dropdown-header">${userData.username}</h6></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="logout-link"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        `;
+    }
+}
+
 function loadProducts() {
     axios.get('http://localhost:8082/api/v1/product/all')
         .then(response => {
