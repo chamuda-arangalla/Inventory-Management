@@ -1,6 +1,5 @@
-package TestClasses;
+package com.example.Inventory_management_backend.controller;
 
-import com.example.Inventory_management_backend.controller.ProductController;
 import com.example.Inventory_management_backend.dto.request.ProductRequest;
 import com.example.Inventory_management_backend.dto.response.ProductResponse;
 import com.example.Inventory_management_backend.service.ProductService;

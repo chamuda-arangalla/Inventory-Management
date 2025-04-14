@@ -1,6 +1,5 @@
-package TestClasses;
+package com.example.Inventory_management_backend.controller;
 
-import com.example.Inventory_management_backend.controller.UserController;
 import com.example.Inventory_management_backend.dto.request.UserRequest;
 import com.example.Inventory_management_backend.dto.response.UserResponse;
 import com.example.Inventory_management_backend.service.UserService;
@@ -46,10 +45,10 @@ public class UserControllerTest {
                 .id(1L)
                 .name("Test User")
                 .email("test@example.com")
-                .phone("123456789")
+                .phone("0775351304")
                 .role("employee")
                 .username("testuser")
-                .password("password")
+                .password("password123")
                 .build();
 
         Mockito.when(userService.createUser(any(UserRequest.class))).thenReturn(userResponse);
