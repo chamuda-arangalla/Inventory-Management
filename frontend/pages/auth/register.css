@@ -24,7 +24,7 @@ body {
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     overflow: hidden;
-    padding: 2rem;
+    padding: 1rem;
     background: white;
     transform: translateY(0);
     transition: all 0.3s ease;
