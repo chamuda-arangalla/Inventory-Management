@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchOrders() {
     console.log("[DEBUG] Starting to fetch orders...");
     
-    axios.get('http://localhost:8082/api/v1/order/')
+    axios.get('http://localhost:8080/api/v1/order/')
         .then(response => {
             console.log("[DEBUG] Received response:", response);
             console.log("[DEBUG] Response data:", response.data);
@@ -316,7 +316,7 @@ function addButtonEventListeners() {
                 confirmButtonText: 'Yes, confirm it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.post('http://localhost:8082/api/v1/sale/', { orderId: parseInt(orderId) })
+                    axios.post('http://localhost:8080/api/v1/sale/', { orderId: parseInt(orderId) })
                         .then(response => {
                             Swal.fire(
                                 'Confirmed!',

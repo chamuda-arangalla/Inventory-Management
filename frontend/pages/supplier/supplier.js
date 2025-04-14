@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const supplierId = 1;
 
 function loadProducts(supplierId) {
-    axios.get(`http://localhost:8082/api/v1/product/sup-product/${supplierId}`)
+    axios.get(`http://localhost:8080/api/v1/product/sup-product/${supplierId}`)
         .then(response => {
             const products = response.data;
             const tableBody = document.querySelector('#productsTable tbody');
@@ -102,7 +102,7 @@ function addProduct() {
     // Debug: Log the actual data being sent
     console.log('Sending product data:', productData);
 
-    axios.post('http://localhost:8082/api/v1/product/save', productData, {
+    axios.post('http://localhost:8080/api/v1/product/save', productData, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -136,7 +136,7 @@ function openEditModal(productId) {
     updateBtn.disabled = true;
     updateBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
 
-    axios.get(`http://localhost:8082/api/v1/product/get-product/${productId}`)
+    axios.get(`http://localhost:8080/api/v1/product/get-product/${productId}`)
         .then(response => {
             const product = response.data;
             
@@ -217,7 +217,7 @@ function updateProduct() {
     });
 
     // Make the API call
-    axios.put(`http://localhost:8082/api/v1/product/update/${productId}`, productData)
+    axios.put(`http://localhost:8080/api/v1/product/update/${productId}`, productData)
         .then(response => {
             // Success notification
             Swal.fire({
@@ -265,7 +265,7 @@ function deleteProduct() {
     const productId = document.getElementById('deleteProductId').value;
     const supplierId = document.getElementById('supplierId').value;
     
-    axios.delete(`http://localhost:8082/api/v1/product/delete/${productId}`)
+    axios.delete(`http://localhost:8080/api/v1/product/delete/${productId}`)
         .then(response => {
             // Close modal and refresh table
             const modal = bootstrap.Modal.getInstance(document.getElementById('deleteProductModal'));

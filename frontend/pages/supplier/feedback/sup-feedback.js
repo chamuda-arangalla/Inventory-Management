@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch all products for the supplier
     async function fetchProducts() {
         try {
-            const response = await axios.get(`http://localhost:8082/api/v1/product/sup-product/${supplierId}`);
+            const response = await axios.get(`http://localhost:8080/api/v1/product/sup-product/${supplierId}`);
             allProducts = response.data;
             populateProductFilters();
         } catch (error) {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch all feedback
     async function fetchFeedback() {
         try {
-            const response = await axios.get('http://localhost:8082/api/v1/feedback/all');
+            const response = await axios.get('http://localhost:8080/api/v1/feedback/all');
             allFeedback = response.data;
             renderFeedbackCards(allFeedback);
             updateNoFeedbackMessage();
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Fetch detailed product information
-            const response = await axios.get(`http://localhost:8082/api/v1/product/get-product/${feedback.productId}`);
+            const response = await axios.get(`http://localhost:8080/api/v1/product/get-product/${feedback.productId}`);
             const product = response.data;
             
             // Set modal content

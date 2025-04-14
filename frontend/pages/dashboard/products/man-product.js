@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // DOM elements
+    const notificationBell = document.querySelector('#navbarDropdown');
+    const notificationDropdown = document.querySelector('#navbarDropdown + .dropdown-menu');
+    const notificationBadge = notificationBell.querySelector('.badge');
+    
     // Sidebar toggle functionality
     const menuToggle = document.getElementById('menu-toggle');
     const wrapper = document.getElementById('wrapper');
@@ -11,7 +16,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize product management
     initProductManagement();
+
+
 });
+
+
+// DOM elements
+const notificationBell = document.querySelector('#navbarDropdown');
+const notificationDropdown = document.querySelector('#navbarDropdown + .dropdown-menu');
+const notificationBadge = notificationBell.querySelector('.badge');
 
 function initProductManagement() {
     // Load products when page loads
@@ -50,7 +63,7 @@ function displayUserInNavbar() {
 }
 
 function loadProducts() {
-    axios.get('http://localhost:8082/api/v1/product/all')
+    axios.get('http://localhost:8080/api/v1/product/all')
         .then(response => {
             const products = response.data;
             const tableBody = document.querySelector('#productsTable tbody');
@@ -105,7 +118,7 @@ function editProduct(productId) {
 
 function deleteProduct(productId) {
     if (confirm('Are you sure you want to delete this product?')) {
-        axios.delete(`http://localhost:8082/api/v1/product/delete/${productId}`)
+        axios.delete(`http://localhost:8080/api/v1/product/delete/${productId}`)
             .then(response => {
                 // Reload products
                 loadProducts();
@@ -138,7 +151,88 @@ function showAlert(message, type) {
     }, 5000);
 }
 
-// You'll also need to implement functions to:
-// 1. Load suppliers for the dropdown
-// 2. Handle the edit modal and form
-// 3. Add more detailed error handling
+function fetchNotifications() {
+  axios.get('http://localhost:8080/api/v1/notifications/')
+    .then(response => {
+      // Get the expiring product notifications from the response
+      const notifications = response.data;
+      
+      // Update the notification badge count
+      updateNotificationBadge(notifications.length);
+      
+      // Update the dropdown with notifications
+      updateNotificationDropdown(notifications);
+    })
+    .catch(error => {
+      console.error('Error fetching notifications:', error);
+    });
+}
+
+
+// Function to update the notification badge with the count
+function updateNotificationBadge(count) {
+  notificationBadge.textContent = count;
+  
+  // Hide badge if no notifications
+  if (count === 0) {
+    notificationBadge.style.display = 'none';
+  } else {
+    notificationBadge.style.display = 'inline-block';
+  }
+}
+
+function updateNotificationDropdown(notifications) {
+  // Clear existing notification items (keeping the header)
+  while (notificationDropdown.children.length > 1) {
+    notificationDropdown.removeChild(notificationDropdown.lastChild);
+  }
+  
+  // If there are no notifications, add a message
+  if (notifications.length === 0) {
+    const noNotificationsItem = document.createElement('li');
+    noNotificationsItem.innerHTML = '<a class="dropdown-item" href="#"><i class="fas fa-check-circle text-success me-2"></i>No expiring products</a>';
+    notificationDropdown.appendChild(noNotificationsItem);
+    return;
+  }
+  
+  // Add each notification to the dropdown
+  notifications.forEach(notification => {
+    const notificationItem = document.createElement('li');
+    
+    // Check if notification mentions "expire today" or "expired" to set appropriate icon
+    let iconClass = 'fas fa-exclamation-circle text-warning';
+    if (notification.includes('expire today')) {
+      iconClass = 'fas fa-exclamation-triangle text-danger';
+    } else if (notification.includes('expired')) {
+      iconClass = 'fas fa-times-circle text-danger';
+    }
+    
+    notificationItem.innerHTML = `<a class="dropdown-item" href="#"><i class="${iconClass} me-2"></i>${notification}</a>`;
+    notificationDropdown.appendChild(notificationItem);
+  });
+  
+  // Add "View All" link if there are multiple notifications
+  if (notifications.length > 1) {
+    const viewAllItem = document.createElement('li');
+    const divider = document.createElement('li');
+    divider.innerHTML = '<hr class="dropdown-divider">';
+    viewAllItem.innerHTML = '<a class="dropdown-item text-center" href="#"><small>View all notifications</small></a>';
+    
+    notificationDropdown.appendChild(divider);
+    notificationDropdown.appendChild(viewAllItem);
+  }
+}
+
+
+// Fetch notifications when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  fetchNotifications();
+  
+  // Set up periodic refresh (every 5 minutes)
+  setInterval(fetchNotifications, 300000);
+});
+
+// Optional: Add a click handler to refresh notifications manually
+notificationBell.addEventListener('click', function() {
+  fetchNotifications();
+});

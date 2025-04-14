@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
 
         try {
-            const response = await axios.post('http://localhost:8082/api/v1/login', {
+            const response = await axios.post('http://localhost:8080/api/v1/login', {
                 username: username,
                 password: password
             });
