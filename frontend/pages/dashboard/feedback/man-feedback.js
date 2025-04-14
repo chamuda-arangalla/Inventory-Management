@@ -249,4 +249,44 @@ document.addEventListener('DOMContentLoaded', function() {
             alert.remove();
         }, 5000);
     }
+
+      // Add each notification to the dropdown
+    notifications.forEach(notification => {
+    const notificationItem = document.createElement('li');
+    
+    // Check if notification mentions "expire today" or "expired" to set appropriate icon
+    let iconClass = 'fas fa-exclamation-circle text-warning';
+    if (notification.includes('expire today')) {
+      iconClass = 'fas fa-exclamation-triangle text-danger';
+    } else if (notification.includes('expired')) {
+      iconClass = 'fas fa-times-circle text-danger';
+    }
+    
+    notificationItem.innerHTML = `<a class="dropdown-item" href="#"><i class="${iconClass} me-2"></i>${notification}</a>`;
+    notificationDropdown.appendChild(notificationItem);
+  });
+
+  function displayUserInNavbar() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (!userData) return;
+    
+    const userDropdown = document.querySelector('#userDropdown');
+    if (userDropdown) {
+        // Update the username display
+        userDropdown.innerHTML = `
+            <i class="fas fa-user-circle"></i> ${userData.username}
+            <span class="badge bg-primary ms-2">${capitalizeFirstLetter(userData.role)}</span>
+        `;
+        
+        // Update the dropdown menu with user-specific options
+        const dropdownMenu = userDropdown.nextElementSibling;
+        dropdownMenu.innerHTML = `
+            <li><h6 class="dropdown-header">${userData.username}</h6></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="logout-link"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        `;
+    }
+}
 });
