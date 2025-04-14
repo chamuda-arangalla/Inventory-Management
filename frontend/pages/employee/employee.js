@@ -392,3 +392,90 @@ function addButtonEventListeners() {
 //         );
 //     }
 // }
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication first
+    checkAuthentication();
+    
+    // Setup sidebar toggle
+    document.getElementById('menu-toggle').addEventListener('click', toggleSidebar);
+    
+    // Load user data and display in navbar
+    displayUserInNavbar();
+    
+    // Setup logout functionality
+    setupLogout();
+});
+
+// Function to check authentication
+function checkAuthentication() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    
+    if (!userData) {
+        window.location.href = '../login.html';
+        return;
+    }
+    
+    // Display user role in console for debugging
+    console.log(`User logged in as: ${userData.role}`);
+}
+
+// Function to display user in navbar
+function displayUserInNavbar() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (!userData) return;
+    
+    const userDropdown = document.querySelector('#userDropdown');
+    if (userDropdown) {
+        // Update the username display
+        userDropdown.innerHTML = `
+            <i class="fas fa-user-circle"></i> ${userData.username}
+            <span class="badge bg-primary ms-2">${capitalizeFirstLetter(userData.role)}</span>
+        `;
+        
+        // Update the dropdown menu with user-specific options
+        const dropdownMenu = userDropdown.nextElementSibling;
+        dropdownMenu.innerHTML = `
+            <li><h6 class="dropdown-header">${userData.username}</h6></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="logout-link"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        `;
+    }
+}
+
+// Helper function to capitalize first letter
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+// Function to setup logout
+function setupLogout() {
+    // Handle logout from dropdown
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#logout-link')) {
+            e.preventDefault();
+            logout();
+        }
+    });
+}
+
+// Logout function (frontend only)
+function logout() {
+    // Show confirmation dialog
+    if (confirm('Are you sure you want to log out?')) {
+        // Clear session storage
+        sessionStorage.removeItem('userData');
+        
+        // Redirect to login page
+        window.location.href = '../auth/login.html';
+    }
+}
+
+// Sidebar toggle function
+function toggleSidebar() {
+    const wrapper = document.getElementById('wrapper');
+    wrapper.classList.toggle('toggled');
+}
