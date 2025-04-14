@@ -480,7 +480,7 @@ function checkAuthentication() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     
     if (!userData) {
-        window.location.href = '../login.html';
+        window.location.href = '../auth/login.html';
         return;
     }
     

@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     
     if (!userData) {
-        window.location.href = '../login.html';
+        window.location.href = '../../../auth/login.html';
         return;
     }
     
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('userData');
         
         // Redirect to login page
-        window.location.href = '../auth/login.html';
+        window.location.href = '../../auth/login.html';
     }
   }
   

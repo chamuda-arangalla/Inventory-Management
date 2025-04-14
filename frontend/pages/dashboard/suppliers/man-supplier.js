@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!str) return '';
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+      // Setup logout functionality
+  setupLogout();
 
     // ----------------------------------
     // 2. NOTIFICATION-RELATED LOGIC
@@ -135,6 +137,30 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }
     }
+
+
+    function setupLogout() {
+        // Handle logout from dropdown
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('#logout-link')) {
+                e.preventDefault();
+                logout();
+            }
+        });
+      }
+      
+      // Logout function (frontend only)
+      function logout() {
+        // Show confirmation dialog
+        if (confirm('Are you sure you want to log out?')) {
+            // Clear session storage
+            sessionStorage.removeItem('userData');
+            
+            // Redirect to login page
+            window.location.href = '../../auth/login.html';
+        }
+      }
+      
 
     // ----------------------------------
     // 4. EMPLOYEE CRUD LOGIC
