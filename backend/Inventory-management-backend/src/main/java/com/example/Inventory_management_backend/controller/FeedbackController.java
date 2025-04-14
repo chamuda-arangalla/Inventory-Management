@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/feedback")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
